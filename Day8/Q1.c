@@ -32,7 +32,7 @@ long long power(int a, int b)
 int main()
 {
     int a, b;
-    printf("enter the vale for a & b:");
+    printf("enter the valUe for a & b:");
 
     scanf("%d %d", &a, &b);
 
