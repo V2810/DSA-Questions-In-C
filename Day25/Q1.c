@@ -1,0 +1,87 @@
+/*
+Problem: Count Occurrences of an Element in Linked List - Implement using linked list with dynamic memory allocation.
+
+Input:
+- First line: integer n (number of nodes)
+- Second line: n space-separated integers (linked list elements)
+- Third line: integer key (element to be counted)
+
+Output:
+- Print the number of times the key appears in the linked list
+
+Example:
+Input:
+6
+10 20 30 20 40 20
+20
+
+Output:
+3
+
+Explanation:
+Traverse the linked list from head to end. Each time a node's data matches the given key, increment a counter. After traversal, print the final count
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure of a node
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+int main() {
+    int n, i, key, count = 0;
+
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+
+    struct Node *head = NULL, *temp = NULL, *newNode = NULL;
+
+    // Create linked list
+    printf("Enter %d elements:\n", n);
+
+    for (i = 0; i < n; i++) {
+        newNode = (struct Node *)malloc(sizeof(struct Node));
+
+        scanf("%d", &newNode->data);
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            temp = head;
+        } else {
+            temp->next = newNode;
+            temp = newNode;
+        }
+    }
+
+    printf("Enter the key to count: ");
+    scanf("%d", &key);
+
+    // Traverse the linked list and count occurrences
+    temp = head;
+
+    printf("Linked List: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+
+        if (temp->data == key) {
+            count++;
+        }
+
+        temp = temp->next;
+    }
+
+    printf("\n");
+
+    printf("Number of occurrences of %d = %d\n", key, count);
+
+    // Free allocated memory
+    temp = head;
+    while (temp != NULL) {
+        struct Node *nextNode = temp->next;
+        free(temp);
+        temp = nextNode;
+    }
+
